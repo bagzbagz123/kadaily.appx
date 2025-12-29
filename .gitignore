@@ -29,7 +29,11 @@
 *.flac
 
 # WordPress uploads directory (contains most media)
-wp-content/uploads/
+# Use ** to allow exceptions for specific files
+wp-content/uploads/**
+!wp-content/uploads/2025/12/cloefitnessfavicon.png
+!wp-content/uploads/2025/12/cloefitnesslogopink.png
+!wp-content/uploads/2025/12/cloefitnesslogowhite.png
 
 # Other large binary files
 *.pdf
