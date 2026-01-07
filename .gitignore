@@ -47,6 +47,7 @@ wp-content/uploads/**
 !wp-content/uploads/2025/12/sled.png
 !wp-content/uploads/2025/12/routine-mobile.png
 !wp-content/uploads/2025/12/mirror.png
+!wp-content/uploads/2025/12/cloe-about-homepage.png
 
 # Other large binary files
 *.pdf
