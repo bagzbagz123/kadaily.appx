@@ -3360,7 +3360,11 @@ img[alt=""][src*=""] {
   height: 0 !important;
 }
 
-/* Hide broken image icons in hero section specifically */
+/* Hide broken image icons in hero section specifically - hide ALL img tags in hero on mobile */
+.m #hero img,
+.m .sib-hero img,
+.m .sie-hero_0 img,
+.m #hero_promo-1 img,
 #hero img[src=""],
 #hero img:not([src]),
 .sib-hero img[src=""],
@@ -3374,6 +3378,7 @@ img[alt=""][src*=""] {
   height: 0 !important;
   position: absolute !important;
   left: -9999px !important;
+  pointer-events: none !important;
 }
 
 /* Ensure background images load properly */
