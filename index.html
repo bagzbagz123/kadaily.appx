@@ -222,7 +222,7 @@ html.d {background-color:rgba(243,242,231,1);}
 .m .sie-header_view-1-1_8-text {color:rgba(255,255,255,1);text-transform:uppercase;line-height:3.6;letter-spacing:0.1em;font-size:15px;text-align:left;font-family:'Neue Haas Grotesk Bold';font-weight:400;font-style:normal;transition-duration:0.5s;transition-property:color,text-decoration;}
 .m .sib-hero {height:660px;}
 .d .sib-hero {height:840px;}
-.m .sib-hero .ss-bg {background-color:rgba(0,0,0,1);background-image:none;background-size:cover;background-position:center;}
+.m .sib-hero .ss-bg {background-color:rgba(0,0,0,1);background-image:url('wp-content/uploads/2025/12/cloebanner5.png');background-size:cover;background-position:center;}
 .d .sib-hero .ss-bg {background-color:rgba(0,0,0,1);background-image:url('wp-content/uploads/2025/12/cloebanner5.png');background-size:cover;background-position:center;}
 .d .sib-hero.sb-nd-wH .sc {height:840px;}
 .d .sie-hero_0 {left:0px;top:0px;width:1200px;height:840px;}
@@ -3345,6 +3345,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .sie-hero_promo-1_8 {
   display: none !important;
   visibility: hidden !important;
+}
+
+/* Hide broken image icons */
+img[src=""],
+img:not([src]),
+img[src*="undefined"],
+img[src*="null"],
+img[alt=""][src*=""] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide broken image icons in hero section specifically */
+#hero img[src=""],
+#hero img:not([src]),
+.sib-hero img[src=""],
+.sib-hero img:not([src]),
+.sib-hero img[src*="undefined"],
+.sib-hero img[src*="null"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Ensure background images load properly */
+.m .sib-hero .ss-bg {
+  background-image: url('wp-content/uploads/2025/12/cloebanner5.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
 }
 
 
