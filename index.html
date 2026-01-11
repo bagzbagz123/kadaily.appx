@@ -4137,91 +4137,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }
     
-    // Ensure recipes text is always displayed on mobile
-    const RECIPES_EXPECTED_TEXT = 'Simple, nourishing recipes paired with practical nutrition guidance - plus meal structure and grocery tips to help you build a routine that supports your training.';
-    var recipesTextRestored = false;
-    
+    // Ensure recipes text is always displayed on mobile (simplified version)
     function ensureRecipesText() {
       // Only run on mobile view
-      const isMobile = window.innerWidth <= 768 || document.documentElement.classList.contains('m');
-      if (!isMobile) return;
+      if (window.innerWidth > 768 && !document.documentElement.classList.contains('m')) return;
       
-      // Try multiple selectors to find the element - find the container first
-      const recipesContainer = document.querySelector('[data-sid="recipes_recipes_5"]') ||
-                                document.querySelector('.sie-recipes_recipes_5');
-      
-      if (!recipesContainer) return;
-      
-      // Find the text element within the container
-      const recipesTextElement = recipesContainer.querySelector('.sie-recipes_recipes_5-text') ||
-                                  recipesContainer.querySelector('p.se-t');
+      var recipesTextElement = document.querySelector('[data-sid="recipes_recipes_5"] .sie-recipes_recipes_5-text') ||
+                                document.querySelector('.sie-recipes_recipes_5 .sie-recipes_recipes_5-text');
       
       if (recipesTextElement) {
-        const currentText = recipesTextElement.textContent.trim();
-        // Always restore if text is missing or wrong - Showit might clear it
-        if (!currentText || currentText !== RECIPES_EXPECTED_TEXT) {
-          // Use innerHTML in case there are any HTML tags
-          recipesTextElement.innerHTML = RECIPES_EXPECTED_TEXT;
-          // Ensure element is visible
-          recipesTextElement.style.display = '';
-          recipesTextElement.style.visibility = 'visible';
-          recipesTextElement.style.opacity = '1';
-          recipesTextRestored = true;
-          // Force a reflow
-          void recipesTextElement.offsetHeight;
-        } else if (currentText === RECIPES_EXPECTED_TEXT) {
-          recipesTextRestored = true;
+        var expectedText = 'Simple, nourishing recipes paired with practical nutrition guidance - plus meal structure and grocery tips to help you build a routine that supports your training.';
+        var currentText = recipesTextElement.textContent.trim();
+        
+        if (!currentText || currentText !== expectedText) {
+          recipesTextElement.textContent = expectedText;
         }
-      }
-    }
-    
-    // Wait for element to exist and restore text
-    function waitForRecipesElementAndRestore() {
-      const isMobile = window.innerWidth <= 768 || document.documentElement.classList.contains('m');
-      if (!isMobile) return;
-      
-      const recipesTextElement = document.querySelector('[data-sid="recipes_recipes_5"] .sie-recipes_recipes_5-text') ||
-                                  document.querySelector('.sie-recipes_recipes_5 .sie-recipes_recipes_5-text');
-      
-      if (recipesTextElement && !recipesTextRestored) {
-        ensureRecipesText();
-      } else if (!recipesTextElement && !recipesTextRestored) {
-        // Element doesn't exist yet, try again soon
-        setTimeout(waitForRecipesElementAndRestore, 100);
-      }
-    }
-    
-    // Run ensureRecipesText immediately before Showit scripts can interfere
-    (function() {
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          ensureRecipesText();
-          waitForRecipesElementAndRestore();
-        });
-      }
-      ensureRecipesText();
-      waitForRecipesElementAndRestore();
-    })();
-    
-    // Set up a MutationObserver specifically for the recipes text element
-    var recipesObserver = null;
-    function setupRecipesObserver() {
-      if (recipesObserver) return; // Already set up
-      
-      recipesObserver = new MutationObserver(function(mutations) {
-        ensureRecipesText();
-      });
-      
-      // Try to find the element and observe it
-      var targetElement = document.querySelector('[data-sid="recipes_recipes_5"]') ||
-                          document.querySelector('.sie-recipes_recipes_5');
-      
-      if (targetElement) {
-        recipesObserver.observe(targetElement, {
-          childList: true,
-          subtree: true,
-          characterData: true
-        });
       }
     }
     
@@ -4250,35 +4180,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
     
     // Also run after delays to catch late-loading content
-    setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 100);
-    setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 500);
-    setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 1000);
-    setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 2000);
-    setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 3000);
+    setTimeout(runReplacements, 500);
+    setTimeout(runReplacements, 2000);
     
     // Run on window load to ensure all content is loaded
     window.addEventListener('load', function() {
       runReplacements();
-      setupRecipesObserver();
-      setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 100);
-      setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 500);
-      setTimeout(function() { runReplacements(); setupRecipesObserver(); }, 1000);
+      setTimeout(runReplacements, 500);
+      setTimeout(runReplacements, 2000);
     });
-    
-    // Set up recipes observer after a short delay to ensure DOM is ready
-    setTimeout(setupRecipesObserver, 100);
-    setTimeout(setupRecipesObserver, 500);
-    setTimeout(setupRecipesObserver, 1000);
-    
-    // Run ensureRecipesText at very frequent intervals to catch any clearing
-    var recipesCheckInterval = setInterval(function() {
-      ensureRecipesText();
-    }, 50);
-    
-    // Stop checking after 10 seconds to avoid performance issues
-    setTimeout(function() {
-      clearInterval(recipesCheckInterval);
-    }, 10000);
   </script>
   <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b3569caa80da52a',t:'MTc2NjYzNTAzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
